@@ -1,0 +1,35 @@
+@import './reset.css';
+
+:root {
+  /* color */
+  --accent-100: #00bfff;
+  --accent-200: #3493ca;
+  --accent-300: #f1f5f9;
+  --black-100: #000;
+  --black-200: #999;
+  --white-100: #fff;
+  --white-200: #eee;
+}
+
+html {
+  font-size: 18px;
+}
+
+body,
+button {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+}
+
+/* Media query --- mobile */
+@media only screen and (min-width: 320px) and (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+/* Media query --- tablet */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  html {
+    font-size: 16px;
+  }
+}
