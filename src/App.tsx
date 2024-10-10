@@ -40,11 +40,14 @@ const Form = styled.form`
   div > button {
     height: 2rem;
     padding: 0.25rem 0.5rem;
-    border-radius: 5px;
-    border: 1px solid #daeff7;
     outline: none;
     cursor: pointer;
     background: none;
+    border: none;
+    border-radius: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   }
 `;
 
@@ -64,24 +67,29 @@ function App() {
 
   const AddToDo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setToDos((pre) => {
-      const newToDo = [...pre['ToDo']];
-      newToDo.push(addToDo);
-      return {
-        ...toDos,
-        ['ToDo']: newToDo,
-      };
-    });
+    const newToDo = {
+      id: Number(new Date()),
+      text: addToDo,
+    };
+    if (addToDo) {
+      setToDos((pre) => {
+        return {
+          ...pre,
+          ['ToDo']: [newToDo, ...pre['ToDo']],
+        };
+      });
+    }
     setAddToDo('');
   };
 
-  const onDropEnd = ({ draggableId, source, destination }: DropResult) => {
+  const onDropEnd = ({ source, destination }: DropResult) => {
     if (!destination) return;
     if (destination.droppableId === source.droppableId) {
       setToDos((pre) => {
         const newBoard = [...pre[source.droppableId]];
+        const newToDo = newBoard[source.index];
         newBoard.splice(source.index, 1);
-        newBoard.splice(destination.index, 0, draggableId);
+        newBoard.splice(destination.index, 0, newToDo);
         return {
           ...toDos,
           [source.droppableId]: newBoard,
@@ -92,8 +100,9 @@ function App() {
       setToDos((pre) => {
         const sourceBoard = [...pre[source.droppableId]];
         const destinationBoard = [...pre[destination.droppableId]];
+        const newToDo = sourceBoard[source.index];
         sourceBoard.splice(source.index, 1);
-        destinationBoard.splice(destination.index, 0, draggableId);
+        destinationBoard.splice(destination.index, 0, newToDo);
         return {
           ...toDos,
           [source.droppableId]: sourceBoard,
