@@ -1,74 +1,72 @@
+// hooks
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { useRecoilState } from 'recoil';
-import { toDosAtom } from './atom';
-import Board from './components/Board';
 import styled from 'styled-components';
+// atoms
+import { toDosAtom } from './atom';
+// components
+import Board from './components/Board';
+import Form from './components/Form';
 
 const MainWrapper = styled.div`
   width: 100%;
   height: 100vh;
   background-color: skyblue;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
 const BoardOuter = styled.div`
   display: flex;
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    h1 {
-      font-size: 1.5rem;
-      font-weight: bold;
-      font-style: italic;
-      margin-bottom: 1rem;
-    }
-  }
 `;
 
 export default function App() {
   const [toDos, setToDos] = useRecoilState(toDosAtom);
 
-  const onDragEnd = ({ draggableId, source, destination }: DropResult) => {
+  const onDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) return;
-    //   if (source.droppableId === destination.droppableId) {
-    //     setToDos((pre) => {
-    //       const newBoard = [...pre[source.droppableId]];
-    //       newBoard.splice(source.index, 1);
-    //       newBoard.splice(destination.index, 0, draggableId);
-    //       return {
-    //         ...pre,
-    //         [source.droppableId]: newBoard,
-    //       };
-    //     });
-    //   }
-    //   if (source.droppableId !== destination.droppableId) {
-    //     setToDos((pre) => {
-    //       const sourceBoard = [...pre[source.droppableId]];
-    //       const destinationBoard = [...pre[destination.droppableId]];
-    //       sourceBoard.splice(source.index, 1);
-    //       destinationBoard.splice(destination.index, 0, draggableId);
-    //       return {
-    //         ...pre,
-    //         [source.droppableId]: sourceBoard,
-    //         [destination.droppableId]: destinationBoard,
-    //       };
-    //     });
-    //   }
+    if (source.droppableId === destination.droppableId) {
+      setToDos((pre) => {
+        const newBoard = [...pre[source.droppableId]];
+        const obj = newBoard[source.index];
+        newBoard.splice(source.index, 1);
+        newBoard.splice(destination.index, 0, obj);
+        return {
+          ...pre,
+          [source.droppableId]: newBoard,
+        };
+      });
+    }
+    if (source.droppableId !== destination.droppableId) {
+      setToDos((pre) => {
+        const sourceBoard = [...pre[source.droppableId]];
+        const destinationBoard = [...pre[destination.droppableId]];
+        const obj = sourceBoard[source.index];
+        sourceBoard.splice(source.index, 1);
+        destinationBoard.splice(destination.index, 0, obj);
+        return {
+          ...pre,
+          [source.droppableId]: sourceBoard,
+          [destination.droppableId]: destinationBoard,
+        };
+      });
+    }
   };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <MainWrapper>
+        <Form />
         <BoardOuter>
           {Object.keys(toDos).map((droppableId, index) => {
             return (
-              <div key={index}>
-                <h1>{droppableId}</h1>
-                <Board toDo={toDos[droppableId]} droppableId={droppableId} />
-              </div>
+              <Board
+                key={index}
+                toDo={toDos[droppableId]}
+                droppableId={droppableId}
+              />
             );
           })}
         </BoardOuter>
