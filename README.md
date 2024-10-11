@@ -1,4 +1,4 @@
-react-beautiful-dnd 라이브러리와 sweet-alert2, recoil을 활용한 칸반보드 애플리케이션입니다.
+react-beautiful-dnd, sweet-alert2, recoil을 활용한 칸반보드 애플리케이션입니다.
 
 <img width="1463" alt="스크린샷 2024-10-11 16 53 20" src="https://github.com/user-attachments/assets/34cdb690-f040-42ec-8f02-cd177e134917">
 
