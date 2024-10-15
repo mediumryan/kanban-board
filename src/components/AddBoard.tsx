@@ -1,12 +1,15 @@
+// hooks
 import React from 'react';
 import styled from 'styled-components';
-import { FaCirclePlus } from 'react-icons/fa6';
 import Swal from 'sweetalert2';
 import { useSetRecoilState } from 'recoil';
+// icons
+import { FaCirclePlus } from 'react-icons/fa6';
+// atoms
 import { toDosAtom } from '../atom';
 
 const AddBoardWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   top: 2rem;
   right: 2rem;
   display: flex;

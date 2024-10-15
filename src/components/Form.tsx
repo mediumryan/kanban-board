@@ -1,6 +1,8 @@
+// hooks
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+// atoms
 import { toDosAtom } from '../atom';
 
 const FormWrapper = styled.form`

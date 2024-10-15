@@ -1,32 +1,46 @@
+// hooks
 import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
-import Item from './Item';
-import { IToDosAtomProps, toDosAtom } from '../atom';
-import { FaRegTrashAlt } from 'react-icons/fa';
 import { useSetRecoilState } from 'recoil';
 import Swal from 'sweetalert2';
+// components
+import Item from './Item';
+// atoms
+import { IToDosAtomProps, toDosAtom } from '../atom';
+// icons
+import { FaRegTrashAlt } from 'react-icons/fa';
 
 const BoardWrapper = styled.ul<{ isDraggingOver: boolean }>`
   position: relative;
   background-color: ${(props) =>
     props.isDraggingOver ? 'steelblue' : 'aliceblue'};
   flex: 1;
+  min-width: 285px;
+  max-height: 320px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
   margin: 0.5rem;
+  padding-bottom: 1rem;
   transition: 300ms background-color ease-in-out;
 `;
 
 const BoardTitle = styled.h1<{ isDraggingOver: boolean }>`
+  position: sticky;
+  top: 0;
   font-size: 1.25rem;
   font-style: italic;
   font-weight: bold;
   color: ${(props) => (props.isDraggingOver ? 'aliceblue' : 'steelblue')};
+  background-color: ${(props) =>
+    props.isDraggingOver ? 'transparent' : 'aliceblue'};
+  width: 100%;
   margin-bottom: 1rem;
+  padding: 0.5rem;
+  opacity: 0.75;
+  border-radius: 10px 10px 0 0;
   transition: 300ms color ease-in-out;
   span {
     padding: 0 1rem;

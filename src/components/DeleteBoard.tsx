@@ -1,10 +1,11 @@
-import React from 'react';
+// hooks
 import styled from 'styled-components';
-import { BsTrash2, BsTrash2Fill } from 'react-icons/bs';
 import { Droppable } from 'react-beautiful-dnd';
+// icons
+import { BsTrash2, BsTrash2Fill } from 'react-icons/bs';
 
 const DeleteBoardWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 2rem;
   right: 2rem;
   width: 200px;

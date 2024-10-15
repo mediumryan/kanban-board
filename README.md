@@ -8,6 +8,7 @@ react-beautiful-dnd, sweet-alert2, recoil을 활용한 칸반보드 애플리케
 - 각 보드의 할 일은 버튼을 클릭하여 삭제할 수 있지만, 좌측 하단의 쓰레기통에 드래그하여 삭제하는 것도 가능합니다.
 - 해당 앱은 macbook air2 화면을 기준으로 만들어졌으며, media query설정은 되어있지 않습니다.
 
---------------
+---
+
 Last modified
 October 11, 2024

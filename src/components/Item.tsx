@@ -1,14 +1,17 @@
+// hooks
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
+import { useSetRecoilState } from 'recoil';
+import Swal from 'sweetalert2';
+// icons
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { LuPencil } from 'react-icons/lu';
-import { useSetRecoilState } from 'recoil';
+// atoms
 import { ITaskProps, toDosAtom } from '../atom';
-import Swal from 'sweetalert2';
 
 const ItemWrapper = styled.li<{ isDragging: boolean }>`
-  width: 100%;
+  width: 85%;
   min-height: 1.5rem;
   color: steelblue;
   background-color: ${(props) => (props.isDragging ? 'aliceblue' : 'skyblue')};

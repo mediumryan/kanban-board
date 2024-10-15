@@ -1,3 +1,4 @@
+// hooks
 import {
   DragDropContext,
   Draggable,
@@ -5,12 +6,14 @@ import {
   DropResult,
 } from 'react-beautiful-dnd';
 import styled from 'styled-components';
-import Board from './components/Board';
 import { useRecoilState } from 'recoil';
-import { toDosAtom } from './atom';
+// components
 import Form from './components/Form';
 import AddBoard from './components/AddBoard';
 import DeleteBoard from './components/DeleteBoard';
+import Board from './components/Board';
+// atoms
+import { toDosAtom } from './atom';
 
 const RootWrapper = styled.div`
   position: relative;
@@ -19,11 +22,12 @@ const RootWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: scroll;
 `;
 
 const InnerWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
   width: 85%;
