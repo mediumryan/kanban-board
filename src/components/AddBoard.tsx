@@ -7,6 +7,8 @@ import { useSetRecoilState } from 'recoil';
 import { FaCirclePlus } from 'react-icons/fa6';
 // atoms
 import { toDosAtom } from '../atom';
+// constants
+import { MEDIA_QUERY_SM } from '../constants/const';
 
 const AddBoardWrapper = styled.div`
   position: fixed;
@@ -18,6 +20,7 @@ const AddBoardWrapper = styled.div`
   align-items: center;
   gap: 0.5rem;
   color: aliceblue;
+  z-index: 999;
   p {
     font-size: 1.15rem;
   }
@@ -26,6 +29,10 @@ const AddBoardWrapper = styled.div`
     border: none;
     outline: none;
     cursor: pointer;
+  }
+  @media only screen and (${MEDIA_QUERY_SM}) {
+    top: 1rem;
+    right: 1rem;
   }
 `;
 

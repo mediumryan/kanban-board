@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Droppable } from 'react-beautiful-dnd';
 // icons
 import { BsTrash2, BsTrash2Fill } from 'react-icons/bs';
+import { MEDIA_QUERY_SM } from '../constants/const';
 
 const DeleteBoardWrapper = styled.div`
   position: fixed;
@@ -13,6 +14,12 @@ const DeleteBoardWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  @media only screen and (${MEDIA_QUERY_SM}) {
+    width: 100px;
+    height: 100px;
+    bottom: 1rem;
+    right: 1rem;
+  }
 `;
 
 const EmptyIcon = styled(BsTrash2)`

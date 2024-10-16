@@ -4,6 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 // atoms
 import { toDosAtom } from '../atom';
+import { MEDIA_QUERY_SM } from '../constants/const';
 
 const FormWrapper = styled.form`
   margin-top: 2rem;
@@ -30,6 +31,8 @@ const FormWrapper = styled.form`
     &:focus {
       border: 2px solid steelblue;
     }
+  }
+  @media only screen and (${MEDIA_QUERY_SM}) {
   }
 `;
 

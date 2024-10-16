@@ -1,6 +1,6 @@
 // hooks
 import React from 'react';
-import { Droppable } from 'react-beautiful-dnd';
+import { DraggableStateSnapshot, Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import { useSetRecoilState } from 'recoil';
 import Swal from 'sweetalert2';
@@ -10,8 +10,12 @@ import Item from './Item';
 import { IToDosAtomProps, toDosAtom } from '../atom';
 // icons
 import { FaRegTrashAlt } from 'react-icons/fa';
+import { MEDIA_QUERY_SM } from '../constants/const';
 
-const BoardWrapper = styled.ul<{ isDraggingOver: boolean }>`
+const BoardWrapper = styled.ul<{
+  isDraggingOver: boolean;
+  isDragging: boolean;
+}>`
   position: relative;
   background-color: ${(props) =>
     props.isDraggingOver ? 'steelblue' : 'aliceblue'};
@@ -25,6 +29,9 @@ const BoardWrapper = styled.ul<{ isDraggingOver: boolean }>`
   margin: 0.5rem;
   padding-bottom: 1rem;
   transition: 300ms background-color ease-in-out;
+  @media only screen and (${MEDIA_QUERY_SM}) {
+    width: 350px;
+  }
 `;
 
 const BoardTitle = styled.h1<{ isDraggingOver: boolean }>`
@@ -74,9 +81,10 @@ const TrashBinIcon = styled(FaRegTrashAlt)`
 
 interface IBoardProps {
   toDoList: IToDosAtomProps;
+  i: DraggableStateSnapshot;
 }
 
-function Board({ toDoList }: IBoardProps) {
+function Board({ toDoList, i }: IBoardProps) {
   const setToDos = useSetRecoilState(toDosAtom);
   const deleteBoard = () => {
     setToDos((pre) => {
@@ -131,6 +139,7 @@ function Board({ toDoList }: IBoardProps) {
       {(provided, info) => {
         return (
           <BoardWrapper
+            isDragging={i.isDragging}
             isDraggingOver={info.isDraggingOver}
             ref={provided.innerRef}
             {...provided.droppableProps}

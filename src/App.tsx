@@ -7,6 +7,7 @@ import {
 } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
+import { useMediaQuery } from 'react-responsive';
 // components
 import Form from './components/Form';
 import AddBoard from './components/AddBoard';
@@ -14,6 +15,8 @@ import DeleteBoard from './components/DeleteBoard';
 import Board from './components/Board';
 // atoms
 import { toDosAtom } from './atom';
+// constants
+import { MEDIA_QUERY_SM } from './constants/const';
 
 const RootWrapper = styled.div`
   position: relative;
@@ -23,6 +26,9 @@ const RootWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   overflow-y: scroll;
+  @media only screen and (${MEDIA_QUERY_SM}) {
+    padding-bottom: 5rem;
+  }
 `;
 
 const InnerWrapper = styled.div`
@@ -31,15 +37,22 @@ const InnerWrapper = styled.div`
   align-items: flex-start;
   flex-wrap: wrap;
   width: 85%;
-  & > div {
-    display: flex;
-    align-items: center;
+  @media only screen and (${MEDIA_QUERY_SM}) {
+    width: 95%;
+    margin-top: 2.5rem;
     justify-content: center;
   }
 `;
 
+const BoardWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export default function App() {
   const [toDos, setToDos] = useRecoilState(toDosAtom);
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
   const onDragEnd = ({ type, source, destination }: DropResult) => {
     if (!destination) return;
@@ -121,7 +134,11 @@ export default function App() {
     <DragDropContext onDragEnd={onDragEnd}>
       <RootWrapper>
         <Form />
-        <Droppable type="board" droppableId="boardZone" direction="horizontal">
+        <Droppable
+          type="board"
+          droppableId="boardZone"
+          direction={isMobile ? 'vertical' : 'horizontal'}
+        >
           {(parentProvided) => {
             return (
               <InnerWrapper
@@ -135,15 +152,15 @@ export default function App() {
                       draggableId={toDoList.title}
                       index={index}
                     >
-                      {(provided) => {
+                      {(provided, i) => {
                         return (
-                          <div
+                          <BoardWrapper
                             ref={provided.innerRef}
                             {...provided.dragHandleProps}
                             {...provided.draggableProps}
                           >
-                            <Board toDoList={toDoList} />
-                          </div>
+                            <Board toDoList={toDoList} i={i} />
+                          </BoardWrapper>
                         );
                       }}
                     </Draggable>
