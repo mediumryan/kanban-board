@@ -11,4 +11,4 @@ react-beautiful-dnd, sweet-alert2, recoil을 활용한 칸반보드 애플리케
 ---
 
 Last modified
-October 11, 2024
+October 16, 2024
